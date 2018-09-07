@@ -76,7 +76,24 @@
 
             <menuitem name="Pagos/Facturas" id="oeh_medical_pagos_facturas" parent="oehealth.oeh_medical_menu" sequence="11"/>
 
-            <menuitem name="Pagos" action="action_account_oehealth_payments" id="oeh_medical_pagos" parent="oeh_medical_pagos_facturas" sequence="21"/>
-            <menuitem name="Facturas" action="action_invoice_oehealth_tree" id="oeh_medical_facturas" parent="oeh_medical_pagos_facturas" sequence="22"/>
+            <record id="action_oeh_medical_payments_action_tree_search" model="ir.actions.server" >
+                <field name="name">Pagos</field>
+                <field name="model_id" ref="model_account_payment"/>
+                <field name="state">code</field>
+                <field name="code">
+                    action = model.oeh_payments_searchs()
+                </field>
+            </record>
+            <record id="action_oeh_medical_invoices_action_tree_search" model="ir.actions.server" >
+                <field name="name">Facturas</field>
+                <field name="model_id" ref="model_account_invoice"/>
+                <field name="state">code</field>
+                <field name="code">
+                    action = model.oeh_invoices_searchs()
+                </field>
+            </record>
+
+            <menuitem name="Pagos" action="action_oeh_medical_payments_action_tree_search" id="oeh_medical_pagos" parent="oeh_medical_pagos_facturas" sequence="21"/>
+            <menuitem name="Facturas" action="action_oeh_medical_invoices_action_tree_search" id="oeh_medical_facturas" parent="oeh_medical_pagos_facturas" sequence="22"/>
         </data>
     </openerp>
