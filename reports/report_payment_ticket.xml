@@ -82,6 +82,11 @@
                                             <!--<td class="text-right"><span t-field="inv.residual"/></td>-->
                                         </tr>
                                     </tbody>
+                                </table><br/>
+                                <table width="100%">
+                                    <tr>
+                                        <td style="font-size: 10px;">Cantidad en texto: <span t-field="o.amount_to_text" /></td>
+                                    </tr>
                                 </table>
                             </div>
                         <div class="header"></div>
@@ -228,6 +233,11 @@
                                                     <span t-field="o.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                                 </td>
                                             </tr>
+                                        </table><br/>
+                                        <table width="100%">
+                                            <tr>
+                                                <td>Cantidad en texto: <span t-field="o.amount_to_text" /></td>
+                                            </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -247,6 +257,23 @@
                     </t>
                 </t>
             </t>
+        </template>
+        <template id="report_add_amount_to_text" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='total']/div[1]/table[1]" position="after">
+                <br/>
+                <table width="100%">
+                    <tr style="border: solid gray 1px;">
+                        <td>Cantidad en texto: <span t-field="o.amount_to_text" /></td>
+                    </tr>
+                </table>
+            </xpath>
+        </template>
+        <template id="report_add_amount_to_text_payment" inherit_id="account.report_payment_receipt">
+            <xpath expr="//div[@t-if='o.amount']" position="after">
+                <div class="col-xs-6" t-if="o.amount">
+                    <strong>Monto en texto: </strong><span t-field="o.amount_to_text"/>
+                </div>
+            </xpath>
         </template>
         <report
             string="Ticket de pago"
